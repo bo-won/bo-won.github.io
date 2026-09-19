@@ -95,8 +95,15 @@
         text-decoration: underline;
     }
 
-    .long-list a {
+    .long-list a,
+    .short-list a {
         text-decoration: underline;
+        text-underline-offset: 2px;
+    }
+
+    .long-list a:hover,
+    .short-list a:hover {
+        text-decoration: none;
     }
 
     #more:hover {
@@ -111,38 +118,6 @@
         margin-bottom: 2em;
     }
 
-    /* Video on/off toggle */
-    #video-toggle {
-        position: fixed;
-        top: 16px;
-        right: 20px;
-        z-index: 10;
-        background: none;
-        border: none;
-        padding: 0;
-        cursor: pointer;
-        color: red;
-        line-height: 0;
-    }
-
-    #video-toggle svg {
-        width: 22px;
-        height: 22px;
-        fill: none;
-        stroke: currentColor;
-        stroke-width: 1.5;
-        stroke-linecap: round;
-        stroke-linejoin: round;
-    }
-
-    #video-toggle .slash {
-        display: none;
-    }
-
-    #video-toggle.off .slash {
-        display: inline;
-    }
-
     </style>
 <body>
 
@@ -153,15 +128,6 @@
             Your browser does not support the video tag.
         </video>
     </div>
-
-    <!-- Video on/off toggle -->
-    <button id="video-toggle" type="button" aria-label="Turn background video off" aria-pressed="true">
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M1.5 12S5.5 5 12 5s10.5 7 10.5 7-4 7-10.5 7S1.5 12 1.5 12z"/>
-            <circle cx="12" cy="12" r="3"/>
-            <line class="slash" x1="3" y1="21" x2="21" y2="3"/>
-        </svg>
-    </button>
 
     <!-- Your content goes here -->
     <div class="container">
@@ -175,8 +141,8 @@
             <div class="grid-long">
                 <p>Currently Teaching:</p>
                 <ul class="short-list">
-                    <li>MIT School of Architecture (2019–present)</li>
-                    <li>Triple Canopy Publication Intensive (2023–present)</li>
+                    <li><a href="https://architecture.mit.edu/people/bo-won-keum" target="_blank" rel="noopener">MIT School of Architecture</a> (2019–present)</li>
+                    <li><a href="https://canopycanopycanopy.com/initiatives" target="_blank" rel="noopener">Triple Canopy Publication Intensive</a> (2023–present)</li>
                 </ul>
                 <div class="columns">
                     <div class="column">
@@ -214,22 +180,6 @@
 
 <script>
     $(document).ready(function(){
-        $('#video-toggle').click(function() {
-            var video = document.getElementById('background-video');
-            var $btn = $(this);
-            var turnOff = !$btn.hasClass('off');
-            $btn.toggleClass('off', turnOff);
-            $btn.attr('aria-pressed', turnOff ? 'false' : 'true');
-            $btn.attr('aria-label', turnOff ? 'Turn background video on' : 'Turn background video off');
-            if (turnOff) {
-                video.pause();
-                $('.video-background').hide();
-            } else {
-                $('.video-background').show();
-                video.play();
-            }
-        });
-
         $('.toggle').click(function() {
             $(this).next('ul').toggle();
         });
@@ -240,9 +190,13 @@
             if (longText.is(':visible')) {
                 longText.hide();
                 $('#more').text('(...)');
+                $('.video-background').show();
+                document.getElementById('background-video').play();
             } else {
                 longText.show();
                 $('#more').text('(..)');
+                document.getElementById('background-video').pause();
+                $('.video-background').hide();
             }
         });
     });
