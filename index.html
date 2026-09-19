@@ -139,7 +139,7 @@
                 </ul>
                 <div class="columns">
                     <div class="column">
-                        <p>Speaking:</p>
+                        <p class="toggle" style="cursor: pointer;">Speaking:</p>
                         <ul class="long-list">
                             <li>“On Copying,” for <i>Ways of Doing Media Studies</i>, taught by Jenny Tang, Stony Brook University, on September 22, 2026. Lecture.</li>
                             <li>“On Ekphrasis,” for <i>Shimmer Around The Edges</i>, taught by Meg Miller, VCU, on April 3, 2026. Lecture.</li>
@@ -150,14 +150,14 @@
                         </ul>
                     </div>
                     <div class="column">
-                        <p>Writing:</p>
+                        <p class="toggle" style="cursor: pointer;">Writing:</p>
                         <ul class="long-list">
                             <li>“On Dear Books to Prisoners,” in <i>On Education</i> (2025) by Amant, Writing. <a href="media/On-Education-Publication-2025_Keum_Excerpt.pdf" target="_blank" rel="noopener">[PDF]</a></li>
                             <li>“On the Letterform of the Age,” <i>Triple Canopy</i>, Issue 26 (February 2021), Writing. <a href="https://tc3.canopycanopycanopy.com/contents/on-the-letterform-of-the-age" target="_blank" rel="noopener">[LINK]</a></li>
                         </ul>
                     </div>
                     <div class="column">
-                        <p>Publishing:</p>
+                        <p class="toggle" style="cursor: pointer;">Publishing:</p>
                         <ul class="long-list">
                             <li><i>NORRI: A Play Book</i> (2024) by DaEun Jung and Ajani Brannum, Design.</li>
                             <li><i>Fossils Are Made From Retreating Water</i>, on residency at the Badlands National Park (2023–2024), Publication.</li>
@@ -173,6 +173,10 @@
 
 <script>
     $(document).ready(function(){
+        $('.toggle').click(function() {
+            $(this).next('ul').toggle();
+        });
+
         $('#more').click(function() {
             var longText = $('.grid-long');
 
